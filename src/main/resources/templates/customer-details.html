@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Details</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #967969; /* Light brown background */
+      background-image: url('https://www.telecom-image-url.com/telecom-background.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .container {
+      background-color: #F2D2BD; /* Medium brown for container */
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      text-align: center;
+      color: #4e3a2a; /* Darker brown for headings */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      color: #4e3a2a; /* Darker brown for text */
+    }
+    th {
+      background-color: #BA9371; /* Darker brown for header */
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Customer Details</h1>
+  <div id="customers-info" class="customer-info">
+    <table id="customers-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Customer rows will be dynamically added here -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // Fetch all customer data from the server
+  async function fetchCustomers() {
+    try {
+      const response = await fetch(`/customers`, {
+        method: 'GET',
+        credentials: 'include' // Include cookies (for session handling)
+      });
+      if (response.ok) {
+        const customers = await response.json();
+
+        const tableBody = document.querySelector('#customers-table tbody');
+        tableBody.innerHTML = ''; // Clear any existing content
+
+        customers.forEach(customer => {
+          const row = document.createElement('tr');
+
+          row.innerHTML = `
+            <td>${customer.customer_id}</td>
+            <td>${customer.first_name}</td>
+            <td>${customer.last_name}</td>
+            <td>${customer.email}</td>
+            <td>${customer.phone}</td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+      } else {
+        console.error('Failed to fetch customers:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+    }
+  }
+
+  // Call the function to fetch and display the customer data when the page loads
+  window.onload = fetchCustomers;
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subscriptions</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #967969; /* Light brown background */
+      background-image: url('https://www.telecom-image-url.com/telecom-background.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .container {
+      background-color: #F2D2BD; /* Medium brown for container */
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 1200px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      text-align: center;
+      color: #4e3a2a; /* Darker brown for headings */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #967969; /* Light brown for table header */
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+    .search-bar {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Subscription Details</h1>
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search by Subscription Plan or ID" onkeyup="searchSubscription()">
+    </div>
+    <table id="subscriptionTable">
+      <thead>
+        <tr>
+          <th>Subscription ID</th>
+          <th>Customer ID</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Change of Plans</th>
+          <th>Eligible Plans</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+         <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function searchSubscription() {
+      const input = document.getElementById('search').value.toUpperCase();
+      const table = document.getElementById('subscriptionTable');
+      const rows = table.getElementsByTagName('tr');
+      let found = false;
+
+      for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let rowMatch = false;
+
+        for (let j = 0; j < cells.length; j++) {
+          if (cells[j]) {
+            const cellText = cells[j].textContent || cells[j].innerText;
+            if (cellText.toUpperCase().indexOf(input) > -1) {
+              rowMatch = true;
+              break;
+            }
+          }
+        }
+
+        if (rowMatch) {
+          found = true;
+          const subscriptionId = cells[0].textContent; // Assuming ID is in the first column
+          window.location.href = `subscription-details.html?id=${subscriptionId}`;
+          break;
+        }
+      }
+
+      if (!found) {
+        alert('No matching subscription found.');
+      }
+    }
+  </script>
+</body>
+</html>

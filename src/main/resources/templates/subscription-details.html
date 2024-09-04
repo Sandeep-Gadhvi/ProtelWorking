@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Subscription Details</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #967969; /* Light brown background */
+      background-image: url('https://www.telecom-image-url.com/telecom-background.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .container {
+      background-color: #F2D2BD; /* Medium brown for container */
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      text-align: center;
+      color: #4e3a2a; /* Darker brown for headings */
+    }
+    .subscription-info {
+      margin-top: 20px;
+    }
+    .subscription-info p {
+      font-size: 18px;
+      color: #4e3a2a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Subscription Details</h1>
+    <div id="subscription-info" class="subscription-info">
+      <!-- Subscription details will be inserted here by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    // Example subscription data
+    const subscriptions = {
+      '': { type: '', description: '', change: '', eligible: ', ' },
+      '': { type: '', description: '', change: '', eligible: '' }
+      // Add more subscription data as needed
+    };
+
+    function getQueryParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    function displaySubscriptionDetails() {
+      const subscriptionId = getQueryParameter('id');
+      const subscription = subscriptions[subscriptionId];
+      const subscriptionInfo = document.getElementById('subscription-info');
+
+      if (subscription) {
+        subscriptionInfo.innerHTML = `
+          <p><strong>Subscription ID:</strong> ${subscriptionId}</p>
+          <p><strong>Type:</strong> ${subscription.type}</p>
+          <p><strong>Description:</strong> ${subscription.description}</p>
+          <p><strong>Change of Plans:</strong> ${subscription.change}</p>
+          <p><strong>Eligible Plans:</strong> ${subscription.eligible}</p>
+        `;
+      } else {
+        subscriptionInfo.innerHTML = '<p>No subscription details found for this ID.</p>';
+      }
+    }
+
+    window.onload = displaySubscriptionDetails;
+  </script>
+</body>
+</html>

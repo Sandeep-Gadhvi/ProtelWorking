@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROTEL Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6d8c9; /* Light brown background */
+            color: #4e3a2a; /* Darker brown text */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4e3a2a; /* Darker brown for header */
+            padding: 10px 0;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .subscriptions, .services {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subscriptions {
+            background-color: #f2d2bd; /* Medium brown for subscription section */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .subscriptions table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .subscriptions table, .subscriptions th, .subscriptions td {
+            border: 1px solid #4e3a2a; /* Darker brown border */
+        }
+
+        .subscriptions th, .subscriptions td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        .subscriptions th {
+            background-color: #4e3a2a; /* Darker brown for header */
+            color: #fff;
+        }
+
+        .subscriptions tr:nth-child(even) {
+            background-color: #f9f0e8; /* Very light brown for alternate rows */
+        }
+
+        .subscriptions tr:hover {
+            background-color: #d1bfa7; /* Slightly lighter brown on hover */
+        }
+
+        .service {
+            background-color: #f2d2bd; /* Medium brown for service sections */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .service img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            transition: transform 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        .service img:hover {
+            transform: scale(1.05); /* Slightly zoom in on hover */
+        }
+
+        .service h3 {
+            color: #4e3a2a; /* Darker brown for headings */
+        }
+
+        footer {
+            background-color: #4e3a2a; /* Darker brown for footer */
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+        <main>
+        <!-- Subscription Plans Section -->
+        <section class="subscriptions">
+            <h2>Subscription Plans</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plan ID</th>
+                        <th>Plan Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Benefits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Basic Plan</td>
+                        <td>Essential features with standard support.</td>
+                        <td>$19.99/month</td>
+                        <td>Access to basic features, email support.</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Standard Plan</td>
+                        <td>Includes additional features and priority support.</td>
+                        <td>$39.99/month</td>
+                        <td>Access to all features, phone support, free upgrades.</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Premium Plan</td>
+                        <td>All-inclusive plan with advanced features and premium support.</td>
+                        <td>$59.99/month</td>
+                        <td>All features included, 24/7 support, dedicated account manager.</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Enterprise Plan</td>
+                        <td>Custom solutions for large organizations with comprehensive support.</td>
+                        <td>$99.99/month</td>
+                        <td>Customizable features, dedicated support team, 24/7 service.</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Family Plan</td>
+                        <td>Cost-effective plan for multiple users with shared benefits.</td>
+                        <td>$79.99/month</td>
+                        <td>Access for up to 4 family members, priority support, shared benefits.</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Student Plan</td>
+                        <td>Affordable plan for students with essential features.</td>
+                        <td>$14.99/month</td>
+                        <td>Discounted rate, access to core features, academic support.</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Senior Plan</td>
+                        <td>Special plan for senior citizens with simplified features.</td>
+                        <td>$29.99/month</td>
+                        <td>Easy-to-use interface, dedicated support, simplified benefits.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services">
+            <h2>Our Services</h2>
+            <div class="service">
+                <img src="ser3.jpg" alt="Service 1">
+                <h3>Service 1: High-Speed Internet: Connecting You to a Faster Future</h3>
+                <p>In a world where every click, stream, and connection matters, our high-speed internet service is your gateway to unparalleled digital experiences. Imagine a connection so swift and reliable that your online activities become seamless, empowering you to achieve more with less waiting.</p>
+            </div>
+            <div class="service">
+                <img src="ser2.jpg" alt="Service 2">
+                <h3>Service 2: Voice Solutions: Empowering Communication with Clarity and Flexibility</h3>
+                <p>In today’s fast-paced world, clear and reliable voice communication is essential for personal and professional success. Our voice solutions are designed to deliver unparalleled quality and flexibility, ensuring that every conversation is as effective and seamless as possible.</p>
+            </div>
+            <div class="service">
+                <img src="ser.jpg" alt="Service 3">
+                <h3>Service 3: Data Centers: The Backbone of Modern Connectivity</h3>
+                <p>In an era where data drives innovation and efficiency, our state-of-the-art data centers are at the heart of our telecom solutions, providing the robust infrastructure necessary for your digital operations. Designed with cutting-edge technology and unparalleled reliability, our data centers ensure that your data is stored securely and accessed seamlessly, supporting the ever-evolving needs of businesses and individuals alike.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 PROTEL Telecom Services. All rights reserved.</p>
+    </footer>
+</body>
+</html>
