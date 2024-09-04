@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6d8c9; /* Light brown background */
+            color: #4e3a2a; /* Darker brown text */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2d2bd; /* Medium brown for container */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4e3a2a; /* Darker brown for headings */
+        }
+
+        .details {
+            margin-top: 20px;
+        }
+
+        .details p {
+            margin: 10px 0;
+        }
+
+        .details label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket Details</h1>
+        <div class="details">
+            <p><label>Ticket ID:</label> <span id="ticketId"></span></p>
+            <p><label>Status:</label> <span id="status"></span></p>
+            <p><label>Customer ID:</label> <span id="customerId"></span></p>
+            <p><label>Details:</label> <span id="details"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Function to extract URL parameters
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to display ticket details
+        function displayTicketDetails() {
+            const ticketId = getParameterByName('id');
+            if (ticketId) {
+                // Simulated data - replace with actual data retrieval logic
+                const ticketData = {
+                    id: ticketId,
+                    status: 'Open',
+                    customerId: '12345',
+                    details: 'This is a sample ticket detail.'
+                };
+
+                document.getElementById('ticketId').textContent = ticketData.id;
+                document.getElementById('status').textContent = ticketData.status;
+                document.getElementById('customerId').textContent = ticketData.customerId;
+                document.getElementById('details').textContent = ticketData.details;
+            } else {
+                alert('No Ticket ID provided.');
+            }
+        }
+
+        // Display ticket details when the page loads
+        displayTicketDetails();
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6d8c9; /* Light brown background */
+            color: #4e3a2a; /* Darker brown text */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            justify-content: center;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2d2bd; /* Medium brown for container */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4e3a2a; /* Darker brown for headings */
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4e3a2a; /* Darker brown for button */
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6f4f28; /* Slightly lighter brown for hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<center>
+        <h1>Search Tickets</h1>
+        <div class="search-bar">
+            <input type="text" id="ticketId" placeholder="Enter Ticket ID">
+            <button onclick="searchTicket()">Search</button>
+        </div>
+    </div>
+
+    <script>
+        function searchTicket() {
+            var ticketId = document.getElementById('ticketId').value;
+            if (ticketId) {
+                window.location.href = `ticket-details.html?id=${ticketId}`;
+            } else {
+                alert('Please enter a Ticket ID.');
+            }
+        }
+    </script>
+</body>
+</html>

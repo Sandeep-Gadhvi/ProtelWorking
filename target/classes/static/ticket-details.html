@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tickets</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #967969; /* Light brown background */
+            background-image: url('https://www.telecom-image-url.com/telecom-background.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            background-color: #F2D2BD; /* Medium brown for container */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            text-align: center;
+            color: #4e3a2a; /* Darker brown for headings */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #967969; /* Light brown for table header */
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .button.resolve {
+            background-color: #28a745;
+        }
+        .button.in-progress {
+            background-color: #ffc107;
+        }
+        .button.closed {
+            background-color: #dc3545;
+        }
+        .status-select {
+            padding: 3px;
+            border-radius: 4px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .search-bar input {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #A95C68;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #8a4b4b;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Admin Dashboard - Tickets</h1>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by Ticket ID">
+        <button onclick="SearchTicket()">Search</button>
+    </div>
+    <table class="ticket-table" id="ticketsTable">
+        <thead>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Customer Email</th>
+            <th>Customer Phone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Tickets will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const ticketsTable = document.getElementById('ticketsTable').getElementsByTagName('tbody')[0];
+        const searchInput = document.getElementById('searchInput');
+
+        // Fetch tickets data
+        fetch('http://localhost:3000/tickets/ticket')
+            .then(response => response.json())
+            .then(data => {
+                displayTickets(data);
+            })
+            .catch(error => console.error('Error fetching tickets:', error));
+
+        // Function to display tickets
+        function displayTickets(tickets) {
+            ticketsTable.innerHTML = ''; // Clear existing rows
+            tickets.forEach(ticket => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                        <td>${ticket.ticket_id}</td>
+                        <td>${ticket.ticket_description}</td>
+                        <td>${ticket.ticket_status}</td>
+                        <td>${new Date(ticket.ticket_date).toLocaleDateString()}</td>
+                        <td>${ticket.subscription.customer.customer_id}</td>
+                        <td>${ticket.subscription.customer.first_name} ${ticket.subscription.customer.last_name}</td>
+                        <td>${ticket.subscription.customer.email}</td>
+                        <td>${ticket.subscription.customer.phone}</td>
+                        <td>
+                            <button class="button resolve" onclick="updateStatus(${ticket.ticket_id}, 'Resolved')">Resolve</button>
+                            <button class="button in-progress" onclick="updateStatus(${ticket.ticket_id}, 'In Progress')">In Progress</button>
+                        </td>
+                    `;
+                ticketsTable.appendChild(row);
+            });
+        }
+
+        // Function to update ticket status
+        function updateStatus(ticketId, status) {
+            fetch(`http://localhost:3000/tickets/ticket/${ticketId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ticket_status: status }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Ticket status updated successfully.');
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to update ticket status.');
+                    }
+                })
+                .then(() => {
+                    fetch('http://localhost:3000/tickets/ticket')
+                        .then(response => response.json())
+                        .then(data => {
+                            displayTickets(data);
+                        });
+                })
+                .catch(error => console.error('Error updating ticket status:', error));
+        }
+
+        // Search functionality
+        searchInput.addEventListener('input', () => {
+            const searchValue = searchInput.value.toLowerCase();
+            const rows = ticketsTable.getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const ticketId = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+                rows[i].style.display = ticketId.includes(searchValue) ? '' : 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Details</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #967969; /* Light brown background */
+      background-image: url('https://www.telecom-image-url.com/telecom-background.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .container {
+      background-color: #F2D2BD; /* Medium brown for container */
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 1000px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom:20px;
+      color: #4e3a2a; /* Darker brown for headings */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #967969; /* Light brown for table header */
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+    .search-bar {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      max-width: 500px;
+    }
+    button {
+      background-color: #A95C68;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    button:hover {
+      background-color: #8a4b4b;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Customer Details</h1>
+  <div class="search-container">
+    <input type="text" id="customerIdInput" placeholder="Enter customer ID">
+    <button onclick="searchCustomer()">Search</button>
+
+  </div>
+
+<div id="customerTable"></div>
+
+<script>
+  async function fetchCustomerData() {
+    try {
+      const response = await fetch('http://localhost:3000/customers');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      displayCustomerData(data);
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
+  function displayCustomerData(data) {
+    const table = document.createElement('table');
+    const headerRow = table.insertRow();
+    headerRow.innerHTML = `<th>Customer ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Phone</th>`;
+
+    data.forEach(customer => {
+      const row = table.insertRow();
+      row.innerHTML = `<td>${customer.customer_id}</td><td>${customer.first_name}</td><td>${customer.last_name}</td><td>${customer.email}</td><td>${customer.phone}</td>`;
+    });
+
+    document.getElementById('customerTable').innerHTML = '';
+    document.getElementById('customerTable').appendChild(table);
+  }
+
+  async function searchCustomer() {
+    const customerId = document.getElementById('customerIdInput').value;
+    if (!customerId) {
+      alert('Please enter a customer ID');
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/customers/${customerId}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      displayCustomerData([data]);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      alert('Customer not found');
+    }
+  }
+
+  // Fetch and display all customers on page load
+  window.onload = fetchCustomerData;
+</script>
+</body>
+</html>

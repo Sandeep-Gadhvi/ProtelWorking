@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #967969; /* Light brown background */
+      background-image: url('https://www.telecom-image-url.com/telecom-background.jpg'); /* Add background image related to telecom services */
+      background-size: cover; /* Ensure the image covers the entire background */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Prevent repeating of the image */
+    }
+    .container {
+      background-color: #F2D2BD; /* Medium brown for container */
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+      position: relative; /* Ensure container is above the background image */
+      z-index: 1; /* Ensure container is above the background image */
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #4e3a2a; /* Darker brown for headings */
+    }
+    .widget {
+      background-color: #FFFFF0; /* Light brown for widgets */
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-align: center;
+      cursor: pointer;
+      color: #4e3a2a; /* Darker brown for text */
+    }
+    .widget:hover {
+      background-color: #967969; /* Slightly darker brown for hover effect */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+
+    <div class="widget" id="customers">
+      <h2>Customers</h2>
+      <p>View and manage customer information.</p>
+    </div>
+
+    <div class="widget" id="invoices">
+      <h2>Invoices</h2>
+      <p>Generate and manage invoices.</p>
+    </div>
+
+    <div class="widget" id="subscriptions">
+      <h2>Subscriptions</h2>
+      <p>View and manage subscription details.</p>
+    </div>
+
+    <div class="widget" id="services">
+      <h2>Services</h2>
+      <p>Manage services offered.</p>
+    </div>
+
+    <div class="widget" id="tickets">
+      <h2>Tickets</h2>
+      <p>Manage and Resolve Tickets Efficiently.</p>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById('customers').addEventListener('click', () => {
+      window.location.href = 'customers.html';
+    });
+
+    document.getElementById('invoices').addEventListener('click', () => {
+      window.location.href = 'invoices.html';
+    });
+
+    document.getElementById('subscriptions').addEventListener('click', () => {
+      window.location.href = 'subscriptions.html';
+    });
+
+    document.getElementById('services').addEventListener('click', () => {
+      window.location.href = 'services.html';
+    });
+
+    document.getElementById('tickets').addEventListener('click', () => {
+      window.location.href = 'tickets.html';
+    });
+  </script>
+</body>
+</html>
